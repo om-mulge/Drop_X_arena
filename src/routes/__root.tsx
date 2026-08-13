@@ -77,16 +77,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Battle Arena — Free Fire Esports Tournaments" },
+      {
+        name: "description",
+        content:
+          "Battle Arena is a community Free Fire esports platform: join solo, duo and squad tournaments, pay entry, get room details and climb the leaderboard.",
+      },
+      { name: "author", content: "Battle Arena" },
+      { property: "og:title", content: "Battle Arena — Free Fire Esports Tournaments" },
+      {
+        property: "og:description",
+        content: "Drop in. Fight hard. Booyah. Community Free Fire tournaments with real prizes.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Rajdhani:wght@400;500;600&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
