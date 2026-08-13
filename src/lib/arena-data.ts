@@ -59,7 +59,7 @@ const baseRules = [
 export const tournaments: Tournament[] = [
   {
     id: "battle-arena-cup-01",
-    name: "Battle Arena Cup #01",
+    name: "Bermuda #01",
     game: "Free Fire MAX",
     type: "Battle Royale",
     description:
@@ -87,7 +87,7 @@ export const tournaments: Tournament[] = [
   },
   {
     id: "night-hunters",
-    name: "Night Hunters",
+    name: "Kalahari",
     game: "Free Fire",
     type: "Clash Squad",
     description: "Late-night duo warfare. Fast rounds, sharp aim, zero mercy.",
@@ -114,7 +114,7 @@ export const tournaments: Tournament[] = [
   },
   {
     id: "solo-warrior",
-    name: "Solo Warrior",
+    name: "Purgatory #01",
     game: "Free Fire MAX",
     type: "Battle Royale",
     description: "One hundred lone wolves drop in. Only one walks out with the booyah.",
@@ -141,7 +141,7 @@ export const tournaments: Tournament[] = [
   },
   {
     id: "phoenix-open",
-    name: "Phoenix Open",
+    name: "Nexterra #01",
     game: "Free Fire MAX",
     type: "Battle Royale",
     description: "Open-entry mixed-mode cup. Solo, duo or squad — pick your poison.",
