@@ -292,7 +292,7 @@ Example:
 
 SOLO
 
-₹49
+₹500
 
 1 PLAYER
 
@@ -328,7 +328,7 @@ Squad Fee
 
 Example:
 
-Solo = ₹49
+Solo = ₹500
 
 Duo = ₹99
 
@@ -1446,7 +1446,7 @@ SOLO WARRIOR
 
 Mode: SOLO
 
-Entry: ₹49
+Entry: ₹500
 
 Prize Pool: ₹3,000
 

@@ -67,7 +67,7 @@ export const tournaments: Tournament[] = [
     banner:
       "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=70",
     modes: ["squad"],
-    fees: { solo: 49, duo: 99, squad: 199 },
+    fees: { solo: 500, duo: 99, squad: 199 },
     slots: { solo: 0, duo: 0, squad: 25 },
     filled: { solo: 0, duo: 0, squad: 12 },
     prizePool: 10000,
@@ -94,7 +94,7 @@ export const tournaments: Tournament[] = [
     banner:
       "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=70",
     modes: ["duo"],
-    fees: { solo: 49, duo: 99, squad: 199 },
+    fees: { solo: 500, duo: 99, squad: 199 },
     slots: { solo: 0, duo: 50, squad: 0 },
     filled: { solo: 0, duo: 31, squad: 0 },
     prizePool: 5000,
@@ -121,7 +121,7 @@ export const tournaments: Tournament[] = [
     banner:
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=70",
     modes: ["solo"],
-    fees: { solo: 49, duo: 99, squad: 199 },
+    fees: { solo: 500, duo: 99, squad: 199 },
     slots: { solo: 100, duo: 0, squad: 0 },
     filled: { solo: 74, duo: 0, squad: 0 },
     prizePool: 3000,
