@@ -1,6 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 
 import heroImage from "@/assets/hero-arena.jpg";
+import characterImg from "@/assets/welcome-character.png";
 import { Countdown } from "@/components/arena/Countdown";
 import { Embers } from "@/components/arena/Embers";
 import { Reveal } from "@/components/arena/Reveal";
@@ -66,6 +67,14 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
         <div className="grid-lines absolute inset-0 opacity-30" />
         <Embers count={24} />
+        <img
+          src={characterImg}
+          alt="Battle Arena esports character"
+          width={768}
+          height={1024}
+          className="pointer-events-none absolute right-0 bottom-0 hidden h-[92%] w-auto object-contain opacity-90 drop-shadow-2xl lg:block"
+          style={{ animation: "hero-enter 1s cubic-bezier(0.16,1,0.3,1) both, float-y 6s ease-in-out 1s infinite" }}
+        />
         <div className="relative mx-auto w-full max-w-7xl px-4 py-24 md:py-36">
           <span
             className="text-display inline-flex rounded-full border border-primary/50 px-3 py-1 text-xs text-primary"
@@ -80,7 +89,7 @@ function Index() {
             Compete. Conquer. Become the Champion. Drop in. Fight hard. Booyah.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg" className="text-display">
+            <Button asChild size="lg" className="text-display shine-on-hover">
               <Link to="/register/$id" params={{ id: featured.id }}>
                 Register For Tournament
               </Link>
