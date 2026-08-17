@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-/** Replaceable brand mark for BATTLE ARENA. Swap the SVG for a real logo later. */
+/** Replaceable brand mark for DROPXARENA. Swap the SVG for a real logo later. */
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <Link to="/" className="flex items-center gap-2.5">
@@ -23,7 +23,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       </span>
       {!compact && (
         <span className="text-display text-lg leading-none">
-          Battle<span className="text-fire"> Arena</span>
+          DropX<span className="text-fire">Arena</span>
         </span>
       )}
     </Link>

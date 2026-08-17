@@ -63,7 +63,7 @@ export const tournaments: Tournament[] = [
     game: "Free Fire MAX",
     type: "Battle Royale",
     description:
-      "The flagship Battle Arena squad showdown. Six matches, one champion, full booyah glory.",
+      "The flagship DropXArena squad showdown. Six matches, one champion, full booyah glory.",
     banner:
       "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=70",
     modes: ["squad"],
@@ -246,7 +246,7 @@ export const leaderboard: LeaderboardRow[] = [
 export const newsItems = [
   {
     category: "Tournament Announcement",
-    title: "Battle Arena Cup #01 registrations are live",
+    title: "DropXArena Cup #01 registrations are live",
     date: "05 Aug 2026",
     image:
       "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=900&q=70",

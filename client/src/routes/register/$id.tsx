@@ -29,7 +29,7 @@ export const Route = createFileRoute("/register/$id")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Registration unavailable — Battle Arena" },
+          { title: "Registration unavailable — DropXArena" },
           { name: "robots", content: "noindex" },
         ],
       };
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/register/$id")({
     const description = `Register solo, duo or squad for ${t.name}. Enter player names and Free Fire UIDs, review your entry and pay the entry fee.`;
     return {
       meta: [
-        { title: `Register — ${t.name} | Battle Arena` },
+        { title: `Register — ${t.name} | DropXArena` },
         { name: "description", content: description },
         { property: "og:title", content: `Register for ${t.name}` },
         { property: "og:description", content: description },

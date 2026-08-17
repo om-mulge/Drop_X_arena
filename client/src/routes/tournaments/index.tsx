@@ -11,13 +11,13 @@ import { tournaments } from "@/lib/arena-data";
 export const Route = createFileRoute("/tournaments/")({
   head: () => ({
     meta: [
-      { title: "Tournament Hub — Battle Arena Free Fire Cups" },
+      { title: "Tournament Hub — DropXArena Free Fire Cups" },
       {
         name: "description",
         content:
           "Browse active Free Fire and Free Fire MAX tournaments. Filter by solo, duo, squad, Battle Royale or Clash Squad and register in minutes.",
       },
-      { property: "og:title", content: "Tournament Hub — Battle Arena" },
+      { property: "og:title", content: "Tournament Hub — DropXArena" },
       {
         property: "og:description",
         content: "Active Free Fire cups with live slots, prize pools and instant registration.",

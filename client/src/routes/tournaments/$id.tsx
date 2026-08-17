@@ -21,16 +21,16 @@ export const Route = createFileRoute("/tournaments/$id")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Tournament unavailable — Battle Arena" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Tournament unavailable — DropXArena" }, { name: "robots", content: "noindex" }],
       };
     }
     const t = loaderData.tournament;
-    const description = `${t.name}: ${t.game} ${t.type} with a ${formatINR(t.prizePool)} prize pool. Register solo, duo or squad on Battle Arena.`;
+    const description = `${t.name}: ${t.game} ${t.type} with a ${formatINR(t.prizePool)} prize pool. Register solo, duo or squad on DropXArena.`;
     return {
       meta: [
-        { title: `${t.name} — Battle Arena Tournament` },
+        { title: `${t.name} — DropXArena Tournament` },
         { name: "description", content: description },
-        { property: "og:title", content: `${t.name} — Battle Arena` },
+        { property: "og:title", content: `${t.name} — DropXArena` },
         { property: "og:description", content: description },
         { property: "og:image", content: t.banner },
         { name: "twitter:image", content: t.banner },

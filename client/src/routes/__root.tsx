@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Battle Arena — Free Fire Esports Tournaments" },
+      { title: "DropXArena" },
       {
         name: "description",
         content:
-          "Battle Arena is a community Free Fire esports platform: join solo, duo and squad tournaments, pay entry, get room details and climb the leaderboard.",
+          "DropXArena is a community Free Fire esports platform: join solo, duo and squad tournaments, pay entry, get room details and climb the leaderboard.",
       },
-      { name: "author", content: "Battle Arena" },
-      { property: "og:title", content: "Battle Arena — Free Fire Esports Tournaments" },
+      { name: "author", content: "DropXArena" },
+      { property: "og:title", content: "DropXArena" },
       {
         property: "og:description",
         content: "Drop in. Fight hard. Booyah. Community Free Fire tournaments with real prizes.",

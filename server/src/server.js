@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.json({
-    name: 'Battle Arena Drop API',
+    name: 'DropXArena Drop API',
     status: 'running',
   });
 });
