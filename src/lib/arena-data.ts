@@ -59,7 +59,7 @@ const baseRules = [
 export const tournaments: Tournament[] = [
   {
     id: "battle-arena-cup-01",
-    name: "Battle Arena Cup #01",
+    name: "Bermuda #01",
     game: "Free Fire MAX",
     type: "Battle Royale",
     description:
@@ -67,7 +67,7 @@ export const tournaments: Tournament[] = [
     banner:
       "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=70",
     modes: ["squad"],
-    fees: { solo: 49, duo: 99, squad: 199 },
+    fees: { solo: 500, duo: 99, squad: 199 },
     slots: { solo: 0, duo: 0, squad: 25 },
     filled: { solo: 0, duo: 0, squad: 12 },
     prizePool: 10000,
@@ -87,14 +87,14 @@ export const tournaments: Tournament[] = [
   },
   {
     id: "night-hunters",
-    name: "Night Hunters",
+    name: "Kalahari",
     game: "Free Fire",
     type: "Clash Squad",
     description: "Late-night duo warfare. Fast rounds, sharp aim, zero mercy.",
     banner:
       "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=70",
     modes: ["duo"],
-    fees: { solo: 49, duo: 99, squad: 199 },
+    fees: { solo: 500, duo: 99, squad: 199 },
     slots: { solo: 0, duo: 50, squad: 0 },
     filled: { solo: 0, duo: 31, squad: 0 },
     prizePool: 5000,
@@ -114,14 +114,14 @@ export const tournaments: Tournament[] = [
   },
   {
     id: "solo-warrior",
-    name: "Solo Warrior",
+    name: "Purgatory #01",
     game: "Free Fire MAX",
     type: "Battle Royale",
     description: "One hundred lone wolves drop in. Only one walks out with the booyah.",
     banner:
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=70",
     modes: ["solo"],
-    fees: { solo: 49, duo: 99, squad: 199 },
+    fees: { solo: 500, duo: 99, squad: 199 },
     slots: { solo: 100, duo: 0, squad: 0 },
     filled: { solo: 74, duo: 0, squad: 0 },
     prizePool: 3000,
@@ -141,7 +141,7 @@ export const tournaments: Tournament[] = [
   },
   {
     id: "phoenix-open",
-    name: "Phoenix Open",
+    name: "Nexterra #01",
     game: "Free Fire MAX",
     type: "Battle Royale",
     description: "Open-entry mixed-mode cup. Solo, duo or squad — pick your poison.",

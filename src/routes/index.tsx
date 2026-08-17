@@ -1,8 +1,10 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 
 import heroImage from "@/assets/hero-arena.jpg";
+import characterImg from "@/assets/welcome-3d-character.png";
 import { Countdown } from "@/components/arena/Countdown";
 import { Embers } from "@/components/arena/Embers";
+import { Reveal } from "@/components/arena/Reveal";
 import { SiteChrome } from "@/components/arena/SiteChrome";
 import { TournamentCard } from "@/components/arena/TournamentCard";
 import { LeaderboardTable } from "@/routes/leaderboard";
@@ -65,6 +67,14 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
         <div className="grid-lines absolute inset-0 opacity-30" />
         <Embers count={24} />
+        <img
+          src={characterImg}
+          alt="Battle Arena esports character"
+          width={832}
+          height={1216}
+          className="pointer-events-none absolute right-0 bottom-0 hidden h-[92%] w-auto object-contain opacity-90 drop-shadow-2xl lg:block"
+          style={{ animation: "hero-enter 1s cubic-bezier(0.16,1,0.3,1) both, float-y 6s ease-in-out 1s infinite" }}
+        />
         <div className="relative mx-auto w-full max-w-7xl px-4 py-24 md:py-36">
           <span
             className="text-display inline-flex rounded-full border border-primary/50 px-3 py-1 text-xs text-primary"
@@ -79,7 +89,7 @@ function Index() {
             Compete. Conquer. Become the Champion. Drop in. Fight hard. Booyah.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg" className="text-display">
+            <Button asChild size="lg" className="text-display shine-on-hover">
               <Link to="/register/$id" params={{ id: featured.id }}>
                 Register For Tournament
               </Link>
@@ -90,39 +100,51 @@ function Index() {
           </div>
 
           <dl className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {SITE_STATS.map((s) => (
-              <div key={s.label} className="glass-panel rounded-lg p-4">
+            {SITE_STATS.map((s, i) => (
+              <Reveal key={s.label} delay={i * 90} className="glass-panel hover-lift rounded-lg p-4">
                 <dt className="text-display text-3xl text-fire">{s.value}</dt>
                 <dd className="text-display text-xs tracking-[0.25em] text-muted-foreground">
                   {s.label}
                 </dd>
-              </div>
+              </Reveal>
             ))}
           </dl>
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-7xl px-4 py-16">
-        <h2 className="text-display text-3xl md:text-4xl">Active Tournaments</h2>
+        <Reveal>
+          <h2 className="text-display text-3xl md:text-4xl">Active Tournaments</h2>
+        </Reveal>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {open.map((t) => (
-            <TournamentCard key={t.id} tournament={t} />
+          {open.map((t, i) => (
+            <Reveal key={t.id} delay={i * 110}>
+              <TournamentCard tournament={t} />
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-7xl px-4 py-10">
-        <h2 className="text-display text-3xl md:text-4xl">Choose Your Battle Mode</h2>
+        <Reveal>
+          <h2 className="text-display text-3xl md:text-4xl">Choose Your Battle Mode</h2>
+        </Reveal>
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
-          {(["solo", "duo", "squad"] as const).map((m) => (
-            <div key={m} className="glass-panel rounded-lg p-6">
-              <div className="text-4xl">{MODE_META[m].icon}</div>
+          {(["solo", "duo", "squad"] as const).map((m, i) => (
+            <Reveal
+              key={m}
+              delay={i * 110}
+              className="glass-panel hover-lift shine-on-hover group rounded-lg p-6"
+            >
+              <div className="text-4xl transition-transform duration-300 group-hover:scale-125">
+                {MODE_META[m].icon}
+              </div>
               <h3 className="text-display mt-3 text-2xl">{MODE_META[m].label}</h3>
               <p className="text-display text-xs text-muted-foreground">
                 {MODE_META[m].players} Player{MODE_META[m].players > 1 ? "s" : ""}
               </p>
               <p className="mt-2 text-sm text-muted-foreground">{MODE_META[m].blurb}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -160,12 +182,12 @@ function Index() {
       <section id="how" className="mx-auto w-full max-w-7xl px-4 py-16">
         <h2 className="text-display text-3xl md:text-4xl">How It Works</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-4">
-          {STEPS.map((s) => (
-            <div key={s.n} className="glass-panel rounded-lg p-6">
+          {STEPS.map((s, i) => (
+            <Reveal key={s.n} delay={i * 90} className="glass-panel hover-lift rounded-lg p-6">
               <span className="text-display text-4xl text-fire">{s.n}</span>
               <h3 className="text-display mt-3 text-lg">{s.t}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{s.d}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -183,15 +205,19 @@ function Index() {
       <section className="mx-auto w-full max-w-7xl px-4 py-16">
         <h2 className="text-display text-3xl md:text-4xl">Latest Events</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {newsItems.map((n) => (
-            <article key={n.title} className="glass-panel overflow-hidden rounded-lg">
+          {newsItems.map((n, i) => (
+            <Reveal
+              key={n.title}
+              delay={i * 110}
+              className="glass-panel hover-lift group overflow-hidden rounded-lg"
+            >
               <img
                 src={n.image}
                 alt={n.title}
                 loading="lazy"
                 width={900}
                 height={480}
-                className="h-40 w-full object-cover"
+                className="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
               <div className="p-5">
                 <p className="text-display text-[10px] tracking-[0.25em] text-primary">
@@ -200,7 +226,7 @@ function Index() {
                 <h3 className="text-display mt-2 text-lg">{n.title}</h3>
                 <p className="mt-1 text-xs text-muted-foreground">{n.date}</p>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </section>

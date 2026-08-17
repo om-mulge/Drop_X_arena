@@ -1,5 +1,7 @@
+import { useEffect, useMemo, useState } from "react";
+import { testSupabaseConnection } from "@/lib/test-supabase";
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+
 
 import { SiteChrome } from "@/components/arena/SiteChrome";
 import { TournamentCard } from "@/components/arena/TournamentCard";
@@ -38,6 +40,11 @@ const FILTERS = [
 ] as const;
 
 function TournamentsPage() {
+  useEffect(() => {
+    console.log("🔥 TOURNAMENT PAGE LOADED");
+    testSupabaseConnection();
+  }, []);
+
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
 
   const list = useMemo(

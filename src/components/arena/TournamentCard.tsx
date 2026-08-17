@@ -24,7 +24,7 @@ export function TournamentCard({ tournament: t }: { tournament: Tournament }) {
   const open = t.status === "registration_open";
 
   return (
-    <article className="group glass-panel relative overflow-hidden rounded-lg transition-all duration-300 hover:-translate-y-1 hover:border-primary/60">
+    <article className="group glass-panel hover-lift shine-on-hover relative overflow-hidden rounded-lg">
       <div className="relative h-40 overflow-hidden">
         <img
           src={t.banner}

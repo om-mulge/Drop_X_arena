@@ -3,6 +3,8 @@ import { Menu } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
 import { Logo } from "./Logo";
+import { CursorGlow } from "./CursorGlow";
+import { WelcomeIntro } from "./WelcomeIntro";
 import { Button } from "@/components/ui/button";
 
 const ROUTE_LINKS = [
@@ -47,6 +49,8 @@ export function SiteChrome({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <WelcomeIntro />
+      <CursorGlow />
       <header className="glass-panel sticky top-0 z-50 border-x-0 border-t-0">
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4">
           <Logo />
@@ -54,7 +58,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             <NavLinks />
           </nav>
           <div className="flex items-center gap-2">
-            <Button asChild size="sm" className="text-display hidden sm:inline-flex">
+            <Button asChild size="sm" className="text-display shine-on-hover hidden sm:inline-flex">
               <Link to="/tournaments">Register Now</Link>
             </Button>
             <Button
