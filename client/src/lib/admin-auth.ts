@@ -16,18 +16,27 @@ type LoginResponse = {
 
 export type AdminSession = NonNullable<LoginResponse["admin"]>;
 
-function getApiBaseUrl() {
-  const configuredBaseUrl = import.meta.env["VITE_API_BASE_URL"] as string | undefined;
+const LOCAL_API_BASE_URL = "http://localhost:4000";
+const DEPLOYED_API_BASE_URL = "https://battle-arena-drop-backend.onrender.com";
 
-  if (configuredBaseUrl) {
-    return configuredBaseUrl.replace(/\/$/, "");
+function getApiBaseUrl() {
+  const configuredBaseUrl = (import.meta.env["VITE_API_BASE_URL"] || import.meta.env.VITE_API_BASE_URL) as string | undefined;
+
+  if (configuredBaseUrl && configuredBaseUrl.trim()) {
+    return configuredBaseUrl.trim().replace(/\/$/, "");
   }
 
   if (typeof window !== "undefined") {
-    return `${window.location.protocol}//${window.location.hostname}:4000`;
+    const hostname = window.location.hostname;
+
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+      return LOCAL_API_BASE_URL;
+    }
+
+    return DEPLOYED_API_BASE_URL;
   }
 
-  return "http://localhost:4000";
+  return LOCAL_API_BASE_URL;
 }
 
 export function getStoredAdminToken() {
