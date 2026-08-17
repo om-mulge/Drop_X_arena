@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const adminRoutes = require('./admin');
 
 router.get('/status', (req, res) => {
   res.json({
@@ -8,5 +9,7 @@ router.get('/status', (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+router.use('/admin', adminRoutes);
 
 module.exports = router;
