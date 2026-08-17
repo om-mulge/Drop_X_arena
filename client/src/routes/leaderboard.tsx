@@ -6,16 +6,16 @@ import { formatINR, leaderboard } from "@/lib/arena-data";
 export const Route = createFileRoute("/leaderboard")({
   head: () => ({
     meta: [
-      { title: "Leaderboard — Battle Arena Free Fire Rankings" },
+      { title: "Leaderboard — DropXArena Free Fire Rankings" },
       {
         name: "description",
         content:
-          "Live Battle Arena standings: team rank, kills, placement points, total points and prize payouts from the latest Free Fire cups.",
+          "Live DropXArena standings: team rank, kills, placement points, total points and prize payouts from the latest Free Fire cups.",
       },
-      { property: "og:title", content: "Leaderboard — Battle Arena" },
+      { property: "og:title", content: "Leaderboard — DropXArena" },
       {
         property: "og:description",
-        content: "Team rankings, kill points and prize payouts from Battle Arena cups.",
+        content: "Team rankings, kill points and prize payouts from DropXArena cups.",
       },
     ],
   }),

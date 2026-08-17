@@ -1,4 +1,4 @@
-# Battle Arena Hub
+# DropXArena Hub
 
 Yes — I checked the current official Garena Free Fire website and used its current structure/content as inspiration. The official site emphasizes Battle Royale, Clash Squad, characters, events, Free Fire MAX, and esports/FFWS. (Garena Free Fire)
 
@@ -23,7 +23,7 @@ Create a completely original esports brand and UI inspired by modern Free Fire-s
 
 Use a fictional tournament brand:
 
-BATTLE ARENA
+DROPXARENA
 
 Tagline:
 
@@ -35,7 +35,7 @@ The logo should be easily replaceable later.
 
 Use terminology such as:
 
-Battle Arena
+DropXArena
 
 Tournament Hub
 
@@ -191,7 +191,7 @@ View tournament button
 
 Example:
 
-BATTLE ARENA CUP #01
+DROPXARENA CUP #01
 
 Game:
 Free Fire MAX
@@ -510,7 +510,7 @@ CONFIRM YOUR ENTRY
 
 Tournament:
 
-Battle Arena Cup #01
+DropXArena Cup #01
 
 Mode:
 
@@ -668,7 +668,7 @@ Show upcoming tournament cards.
 
 Example:
 
-BATTLE ARENA CUP #01
+DROPXARENA CUP #01
 
 SQUAD
 
@@ -1348,7 +1348,7 @@ FOOTER
 
 Include:
 
-BATTLE ARENA
+DROPXARENA
 
 "Your next battle starts here."
 
@@ -1418,7 +1418,7 @@ ONLINE FORM WEBSITE
 
 Populate the initial UI with realistic sample tournaments:
 
-BATTLE ARENA CUP
+DROPXARENA CUP
 
 Mode: SQUAD
 

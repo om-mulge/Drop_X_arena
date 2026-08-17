@@ -5,7 +5,7 @@ const adminRoutes = require('./admin');
 router.get('/status', (req, res) => {
   res.json({
     ok: true,
-    message: 'Battle Arena Drop API is running',
+    message: 'DropXArena Drop API is running',
     timestamp: new Date().toISOString(),
   });
 });

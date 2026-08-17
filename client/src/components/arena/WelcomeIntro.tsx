@@ -52,7 +52,7 @@ export function WelcomeIntro() {
       className="fixed inset-0 z-[100] overflow-hidden bg-background"
       style={{ animation: closing ? "intro-out 0.55s ease-in forwards" : undefined }}
       role="dialog"
-      aria-label="Welcome to Battle Arena"
+      aria-label="Welcome to DropXArena"
     >
       <div className="grid-lines absolute inset-0 opacity-25" />
       <div
@@ -127,7 +127,7 @@ export function WelcomeIntro() {
             )}
             <img
               src={characterImg}
-              alt="Battle Arena 3D character stepping toward the player"
+              alt="DropXArena 3D character stepping toward the player"
               width={832}
               height={1216}
               className="h-[55vh] w-auto object-contain drop-shadow-2xl md:h-[72vh]"
@@ -177,7 +177,7 @@ export function WelcomeIntro() {
           />
           <img
             src={characterImg}
-            alt="Battle Arena esports character welcoming players"
+            alt="DropXArena esports character welcoming players"
             width={768}
             height={1024}
             className="relative h-[42vh] w-auto object-contain drop-shadow-2xl md:h-[78vh]"

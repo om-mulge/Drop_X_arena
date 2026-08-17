@@ -27,7 +27,7 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Battle Arena — Free Fire Tournaments, Solo Duo & Squad" },
+      { title: "DropXArena" },
       {
         name: "description",
         content:
