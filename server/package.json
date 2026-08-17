@@ -5,7 +5,9 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "node --watch src/server.js"
+    "dev": "node --watch src/server.js",
+    "admin:create": "node scripts/create-admin-user.js",
+    "admin:schema": "node scripts/run-admin-schema.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
