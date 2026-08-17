@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
-import characterImg from "@/assets/welcome-character.png";
-import runnerAsset from "@/assets/arena-hero-character.png.asset.json";
+import characterImg from "@/assets/welcome-3d-character.png";
 import { Embers } from "./Embers";
 import { Button } from "@/components/ui/button";
 
@@ -33,8 +32,8 @@ export function WelcomeIntro() {
   function enterArena() {
     if (phase !== "idle") return;
     setPhase("running");
-    window.setTimeout(() => setPhase("greeting"), 1500);
-    window.setTimeout(dismiss, 4200);
+    window.setTimeout(() => setPhase("greeting"), 1600);
+    window.setTimeout(dismiss, 3800);
   }
 
   useEffect(() => {
@@ -71,36 +70,49 @@ export function WelcomeIntro() {
 
       {running && (
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          {[22, 38, 54, 70].map((top, i) => (
-            <span
-              key={top}
-              className="absolute h-px w-1/3"
-              style={{
-                top: `${top}%`,
-                left: 0,
-                background: "var(--gradient-fire)",
-                animation: `speed-streak ${0.8 + i * 0.12}s ease-out ${i * 0.08}s 2`,
-              }}
-            />
-          ))}
+          <div
+            className="absolute inset-0"
+            style={{ perspective: "700px", transformStyle: "preserve-3d" }}
+          >
+            {Array.from({ length: 18 }).map((_, i) => (
+              <span
+                key={i}
+                className="absolute h-16 w-px"
+                style={{
+                  top: `${(i * 37) % 90}%`,
+                  left: `${(i * 53) % 96}%`,
+                  background: "var(--gradient-fire)",
+                  animation: `warp-line ${0.9 + (i % 5) * 0.15}s linear ${i * 0.07}s infinite`,
+                }}
+              />
+            ))}
+          </div>
         </div>
       )}
 
       {running ? (
-        <div className="relative flex h-full w-full items-end justify-center">
+        <div
+          className="relative flex h-full w-full items-center justify-center"
+          style={{ perspective: "900px", transformStyle: "preserve-3d" }}
+        >
           <div
-            className="absolute bottom-[18%] size-40 rounded-full"
+            className="absolute size-56 rounded-full"
             style={{
               background: "var(--gradient-fire)",
-              opacity: 0.35,
-              filter: "blur(30px)",
-              animation: "shockwave 1.2s ease-out 1.2s both",
+              opacity: 0.3,
+              filter: "blur(40px)",
+              animation: "shockwave 1.3s ease-out 1.2s both",
             }}
             aria-hidden="true"
           />
           <div
             className="relative flex flex-col items-center"
-            style={{ animation: closing ? "char-dash-out 0.6s ease-in forwards" : "char-run-in 1.5s cubic-bezier(0.16,1,0.3,1) both" }}
+            style={{
+              transformStyle: "preserve-3d",
+              animation: closing
+                ? "char-pass-through 0.6s ease-in forwards"
+                : "char-approach 1.6s cubic-bezier(0.16,1,0.3,1) both",
+            }}
           >
             {phase === "greeting" && (
               <div
@@ -114,15 +126,12 @@ export function WelcomeIntro() {
               </div>
             )}
             <img
-              src={runnerAsset.url}
-              alt="Battle Arena character running in to welcome the player"
-              className="h-[55vh] w-auto object-contain drop-shadow-2xl md:h-[75vh]"
-              style={{
-                animation:
-                  phase === "running"
-                    ? "char-run-bob 0.28s ease-in-out infinite"
-                    : "float-y 3s ease-in-out infinite",
-              }}
+              src={characterImg}
+              alt="Battle Arena 3D character stepping toward the player"
+              width={832}
+              height={1216}
+              className="h-[55vh] w-auto object-contain drop-shadow-2xl md:h-[72vh]"
+              style={{ animation: "float-y 3s ease-in-out infinite" }}
             />
           </div>
         </div>
