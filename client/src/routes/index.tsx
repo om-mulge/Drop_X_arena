@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
         content:
           "Enter the battlefield. Register solo, duo or squad for community Free Fire and Free Fire MAX tournaments, get room details and climb the leaderboard.",
       },
-      { property: "og:title", content: "Battle Arena — Enter The Battlefield" },
+      { property: "og:title", content: "DropXarena— Enter The Battlefield" },
       {
         property: "og:description",
         content: "Compete. Conquer. Become the champion in community Free Fire cups.",
