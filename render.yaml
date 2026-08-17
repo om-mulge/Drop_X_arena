@@ -1,7 +1,7 @@
 services:
   - type: web
     name: battle-arena-drop-client
-    runtime: static
+    runtime: node
     rootDir: client
     buildCommand: npm run build
-    staticPublishPath: .output/public
+    startCommand: npm run start
