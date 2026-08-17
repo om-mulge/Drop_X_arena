@@ -8,6 +8,14 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+**/node_modules/
+package-lock.json
+**/package-lock.json
+bun.lock
+**/bun.lock
+.env
+**/.env
+
 dist
 dist-ssr
 .output
