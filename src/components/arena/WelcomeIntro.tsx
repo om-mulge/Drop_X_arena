@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import characterImg from "@/assets/welcome-character.png";
+import runnerAsset from "@/assets/arena-hero-character.png.asset.json";
 import { Embers } from "./Embers";
 import { Button } from "@/components/ui/button";
 
@@ -9,6 +10,7 @@ export function WelcomeIntro() {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [closing, setClosing] = useState(false);
+  const [phase, setPhase] = useState<"idle" | "running" | "greeting">("idle");
 
   useEffect(() => {
     setMounted(true);
@@ -28,13 +30,23 @@ export function WelcomeIntro() {
     window.setTimeout(() => setVisible(false), 550);
   }
 
+  function enterArena() {
+    if (phase !== "idle") return;
+    setPhase("running");
+    window.setTimeout(() => setPhase("greeting"), 1500);
+    window.setTimeout(dismiss, 4200);
+  }
+
   useEffect(() => {
     if (!visible || closing) return;
-    const t = window.setTimeout(dismiss, 6500);
+    if (phase !== "idle") return;
+    const t = window.setTimeout(dismiss, 12000);
     return () => window.clearTimeout(t);
-  }, [visible, closing]);
+  }, [visible, closing, phase]);
 
   if (!mounted || !visible) return null;
+
+  const running = phase !== "idle";
 
   return (
     <div
@@ -57,6 +69,64 @@ export function WelcomeIntro() {
         }}
       />
 
+      {running && (
+        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+          {[22, 38, 54, 70].map((top, i) => (
+            <span
+              key={top}
+              className="absolute h-px w-1/3"
+              style={{
+                top: `${top}%`,
+                left: 0,
+                background: "var(--gradient-fire)",
+                animation: `speed-streak ${0.8 + i * 0.12}s ease-out ${i * 0.08}s 2`,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {running ? (
+        <div className="relative flex h-full w-full items-end justify-center">
+          <div
+            className="absolute bottom-[18%] size-40 rounded-full"
+            style={{
+              background: "var(--gradient-fire)",
+              opacity: 0.35,
+              filter: "blur(30px)",
+              animation: "shockwave 1.2s ease-out 1.2s both",
+            }}
+            aria-hidden="true"
+          />
+          <div
+            className="relative flex flex-col items-center"
+            style={{ animation: closing ? "char-dash-out 0.6s ease-in forwards" : "char-run-in 1.5s cubic-bezier(0.16,1,0.3,1) both" }}
+          >
+            {phase === "greeting" && (
+              <div
+                className="glass-panel mb-4 rounded-lg px-5 py-3 text-center"
+                style={{ animation: "fade-in 0.4s ease-out both" }}
+              >
+                <p className="text-display text-lg md:text-2xl">
+                  Welcome, <span className="text-fire">Warrior!</span>
+                </p>
+                <p className="text-xs text-muted-foreground">Drop in. Fight hard. Booyah.</p>
+              </div>
+            )}
+            <img
+              src={runnerAsset.url}
+              alt="Battle Arena character running in to welcome the player"
+              className="h-[55vh] w-auto object-contain drop-shadow-2xl md:h-[75vh]"
+              style={{
+                animation:
+                  phase === "running"
+                    ? "char-run-bob 0.28s ease-in-out infinite"
+                    : "float-y 3s ease-in-out infinite",
+              }}
+            />
+          </div>
+        </div>
+      ) : (
       <div className="relative mx-auto flex h-full w-full max-w-6xl flex-col items-center justify-center gap-6 px-6 md:flex-row md:justify-between">
         <div className="order-2 text-center md:order-1 md:text-left">
           <p
@@ -81,7 +151,7 @@ export function WelcomeIntro() {
             size="lg"
             className="text-display mt-7"
             style={{ animation: "fade-in 0.7s ease-out 0.65s both" }}
-            onClick={dismiss}
+            onClick={enterArena}
           >
             Enter The Arena
           </Button>
@@ -106,6 +176,7 @@ export function WelcomeIntro() {
           />
         </div>
       </div>
+      )}
 
       <button
         onClick={dismiss}
