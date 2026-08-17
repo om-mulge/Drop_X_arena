@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 
 import heroImage from "@/assets/hero-arena.jpg";
-import characterImg from "@/assets/welcome-character.png";
+import characterImg from "@/assets/welcome-3d-character.png";
 import { Countdown } from "@/components/arena/Countdown";
 import { Embers } from "@/components/arena/Embers";
 import { Reveal } from "@/components/arena/Reveal";
@@ -70,8 +70,8 @@ function Index() {
         <img
           src={characterImg}
           alt="Battle Arena esports character"
-          width={768}
-          height={1024}
+          width={832}
+          height={1216}
           className="pointer-events-none absolute right-0 bottom-0 hidden h-[92%] w-auto object-contain opacity-90 drop-shadow-2xl lg:block"
           style={{ animation: "hero-enter 1s cubic-bezier(0.16,1,0.3,1) both, float-y 6s ease-in-out 1s infinite" }}
         />
