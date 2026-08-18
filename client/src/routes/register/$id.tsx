@@ -222,7 +222,10 @@ function DetailsFlow({
   const [useSub, setUseSub] = useState(false);
   const [contact, setContact] = useState({ phone: "", email: "", whatsapp: "", city: "" });
   const [touched, setTouched] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<"UPI" | "QR Code" | null>(null);
   const [paymentState, setPaymentState] = useState<"pending" | "processing" | "paid">("pending");
+
+  const whatsappNumber = ".....";
 
   const registrationId = useMemo(
     () => `BA-2026-${String(Math.floor(100000 + Math.random() * 899999)).slice(0, 6)}`,
@@ -411,30 +414,86 @@ function DetailsFlow({
       <div>
         <h1 className="text-display text-3xl md:text-4xl">Payment</h1>
         <p className="mt-2 text-muted-foreground">
-          Choose a method. Payment is verified server-side before your slot is confirmed.
+          Choose a payment method. Pay on the specified UPI ID or QR code, then proceed.
         </p>
         <div className="glass-panel mt-6 rounded-lg p-6">
           <div className="text-display flex items-center justify-between text-xl">
             <span>Amount due</span>
             <span className="text-fire">{formatINR(total)}</span>
           </div>
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            {["UPI", "QR Code", "Razorpay"].map((method) => (
-              <div
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {(["UPI", "QR Code"] as const).map((method) => (
+              <button
                 key={method}
-                className="text-display rounded-md border border-border p-4 text-center text-sm"
+                type="button"
+                onClick={() => setPaymentMethod(method)}
+                className={`text-display rounded-md border p-4 text-center text-sm transition-colors ${
+                  paymentMethod === method
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-border hover:border-primary/70"
+                }`}
               >
                 {method}
-              </div>
+              </button>
             ))}
           </div>
+
+          {paymentMethod && (
+            <div className="mt-6 space-y-4 rounded-md border border-border bg-background/50 p-4 text-left">
+              {paymentMethod === "UPI" ? (
+                <>
+                  <p className="text-display text-xs tracking-[0.2em] text-muted-foreground">
+                    UPI ID
+                  </p>
+                  <p className="text-display text-2xl font-semibold text-fire">droparena@upi</p>
+                  <p className="text-sm text-muted-foreground">
+                    Pay on this UPI ID for registration. Take a screenshot and share it to this
+                    WhatsApp number: <span className="font-semibold text-foreground">{whatsappNumber}</span>
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="text-display text-xs tracking-[0.2em] text-muted-foreground">
+                    QR Code
+                  </p>
+                  <div className="mx-auto flex w-52 items-center justify-center rounded-md border border-dashed border-border bg-muted/30 p-3">
+                    <div className="grid w-full max-w-[150px] grid-cols-7 gap-1">
+                      {Array.from({ length: 49 }).map((_, idx) => {
+                        const active =
+                          idx % 2 === 0 ||
+                          idx % 5 === 0 ||
+                          idx % 7 === 0 ||
+                          idx % 11 === 0 ||
+                          idx % 13 === 0 ||
+                          idx % 17 === 0 ||
+                          idx % 19 === 0 ||
+                          idx % 23 === 0;
+                        return (
+                          <span
+                            key={idx}
+                            className={`aspect-square rounded-[2px] ${active ? "bg-foreground" : "bg-transparent"}`}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Scan this QR code to pay for registration. Take a screenshot and send it on
+                    WhatsApp: <span className="font-semibold text-foreground">{whatsappNumber}</span>
+                  </p>
+                </>
+              )}
+            </div>
+          )}
+
           <p className="text-display mt-4 text-xs text-muted-foreground">
             Status: {paymentState.toUpperCase()}
           </p>
           <Button
             size="lg"
             className="text-display mt-6 w-full"
-            disabled={paymentState === "processing"}
+            disabled={paymentState === "processing" || !paymentMethod}
             onClick={() => {
               setPaymentState("processing");
               setTimeout(() => {
@@ -443,11 +502,10 @@ function DetailsFlow({
               }, 1200);
             }}
           >
-            {paymentState === "processing" ? "Processing…" : `Pay ${formatINR(total)}`}
+            {paymentState === "processing"
+              ? "Processing…"
+              : "Pay on the specified QR or UPI and proceed"}
           </Button>
-          <p className="mt-3 text-xs text-muted-foreground">
-            Demo checkout — connect a live gateway to take real payments.
-          </p>
         </div>
       </div>
     );
@@ -458,8 +516,8 @@ function DetailsFlow({
       <Embers count={22} />
       <div className="relative">
         <div className="text-6xl">🔥</div>
-        <h1 className="text-display mt-4 text-5xl text-fire">You're In!</h1>
-        <p className="text-display text-muted-foreground">Registration confirmed</p>
+        <h1 className="text-display mt-4 text-5xl text-fire">Congratulations!</h1>
+        <p className="text-display text-muted-foreground">Your registration is in progress</p>
         <Badge className="text-display mt-4 rounded-sm text-base">{registrationId}</Badge>
 
         <div className="glass-panel mt-8 space-y-3 rounded-lg p-6 text-left">
@@ -468,9 +526,23 @@ function DetailsFlow({
           {count > 1 && <Row label="Team" value={teamName} />}
           <Row label="Players" value={players.map((p) => p.name).join(", ")} />
           <Row label="Entry Fee" value={formatINR(total)} />
-          <Row label="Payment" value="PAID" />
+          <Row label="Payment" value="PENDING VERIFICATION" />
           <Row label="Match" value={formatDateTime(tournament.startsAt)} />
-          <Row label="Room Details" value="Locked until match day" />
+          <Row label="Room Details" value="Locked until the team verifies payment" />
+        </div>
+
+        <div className="glass-panel mt-6 rounded-lg p-6 text-left">
+          <p className="text-display text-2xl text-fire">Congratulations on your registration!</p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            The team will verify your status and payment, and will start the tournament after the
+            payment is confirmed.
+          </p>
+          <p className="mt-4 text-sm text-foreground">
+            Take a screenshot for security purpose and send it to the WhatsApp number below: <span className="font-semibold text-fire">{whatsappNumber}</span>
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Further instructions will be given in the WhatsApp community.
+          </p>
         </div>
 
         <div className="mt-6 flex flex-wrap justify-center gap-3">
