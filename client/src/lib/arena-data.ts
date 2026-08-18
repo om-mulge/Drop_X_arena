@@ -59,7 +59,7 @@ const baseRules = [
 export const tournaments: Tournament[] = [
   {
     id: "battle-arena-cup-01",
-    name: "Bermuda #01",
+    name: "Bermudaaaaa #01",
     game: "Free Fire MAX",
     type: "Battle Royale",
     description:
