@@ -80,12 +80,13 @@ function uidError(uid: string) {
   return null;
 }
 
-type Step = "mode" | "details" | "summary" | "payment" | "done";
+type Step = "mode" | "map" | "details" | "summary" | "payment" | "done";
 
 function RegisterPage() {
   const { tournament } = Route.useLoaderData();
   const [step, setStep] = useState<Step>("mode");
   const [mode, setMode] = useState<BattleMode | null>(null);
+  const [mapName, setMapName] = useState<string | null>(null);
 
   return (
     <SiteChrome>
@@ -107,18 +108,36 @@ function RegisterPage() {
               tournament={tournament}
               onSelect={(m) => {
                 setMode(m);
-                setStep("details");
+                setMapName(null);
+                setStep("map");
               }}
             />
           )}
 
-          {step !== "mode" && mode && (
+          {step === "map" && mode && (
+            <MapStep
+              tournament={tournament}
+              mode={mode}
+              selectedMap={mapName}
+              onSelect={(value) => {
+                setMapName(value);
+                setStep("details");
+              }}
+              onBack={() => setStep("mode")}
+            />
+          )}
+
+          {step !== "mode" && step !== "map" && mode && (
             <DetailsFlow
               tournament={tournament}
               mode={mode}
+              mapName={mapName ?? tournament.maps[0] ?? "Bermuda"}
               step={step}
               setStep={setStep}
-              onChangeMode={() => setStep("mode")}
+              onChangeMode={() => {
+                setMapName(null);
+                setStep("mode");
+              }}
             />
           )}
         </div>
@@ -129,6 +148,7 @@ function RegisterPage() {
 
 const STEPS: { key: Step; label: string }[] = [
   { key: "mode", label: "Mode" },
+  { key: "map", label: "Map" },
   { key: "details", label: "Players" },
   { key: "summary", label: "Review" },
   { key: "payment", label: "Payment" },
@@ -200,15 +220,65 @@ function ModeStep({
   );
 }
 
+function MapStep({
+  tournament,
+  mode,
+  selectedMap,
+  onSelect,
+  onBack,
+}: {
+  tournament: Tournament;
+  mode: BattleMode;
+  selectedMap: string | null;
+  onSelect: (map: string) => void;
+  onBack: () => void;
+}) {
+  const mapChoices = tournament.maps.length ? tournament.maps : ["Bermuda", "Kalahari", "Purgatory"];
+  const visibleMaps = mapChoices.length === 1 ? ["Bermuda"] : mapChoices.filter((map) => ["Bermuda", "Kalahari", "Purgatory"].includes(map));
+
+  return (
+    <div>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-display text-3xl md:text-4xl">Choose Your Map</h1>
+        <Button variant="outline" size="sm" className="text-display" onClick={onBack}>
+          Change mode
+        </Button>
+      </div>
+      <p className="mt-2 text-muted-foreground">
+        {MODE_META[mode].label} · {formatINR(tournament.fees[mode])} · Same price on every map
+      </p>
+
+      <div className="mt-6 grid gap-4 sm:grid-cols-3">
+        {visibleMaps.map((map) => (
+          <button
+            key={map}
+            type="button"
+            onClick={() => onSelect(map)}
+            className={`glass-panel rounded-lg p-6 text-left transition-all hover:-translate-y-1 hover:border-primary ${
+              selectedMap === map ? "border-primary bg-primary/10" : ""
+            }`}
+          >
+            <div className="text-display text-3xl text-primary">{map}</div>
+            <p className="mt-3 text-sm text-muted-foreground">Entry fee: {formatINR(tournament.fees[mode])}</p>
+            <p className="text-display mt-4 text-xs text-primary">SELECT MAP →</p>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function DetailsFlow({
   tournament,
   mode,
+  mapName,
   step,
   setStep,
   onChangeMode,
 }: {
   tournament: Tournament;
   mode: BattleMode;
+  mapName: string;
   step: Step;
   setStep: (s: Step) => void;
   onChangeMode: () => void;
@@ -243,7 +313,6 @@ function DetailsFlow({
     !duplicateUid;
 
   const total = tournament.fees[mode] + tournament.platformFee;
-  const filledCount = players.filter((p) => p.name.trim() && !uidError(p.uid)).length;
 
   function update(i: number, patch: Partial<PlayerEntry>) {
     setPlayers((prev) => prev.map((p, idx) => (idx === i ? { ...p, ...patch } : p)));
@@ -261,8 +330,7 @@ function DetailsFlow({
           </Button>
         </div>
         <p className="text-display mt-2 text-sm text-primary">
-          {MODE_META[mode].label} · {formatINR(tournament.fees[mode])} · {filledCount} /{" "}
-          {count} players added
+          {MODE_META[mode].label} · {formatINR(tournament.fees[mode])} · {mapName}
         </p>
 
         <div className="mt-6 space-y-5">
@@ -368,6 +436,7 @@ function DetailsFlow({
         <div className="glass-panel mt-6 space-y-4 rounded-lg p-6">
           <Row label="Tournament" value={tournament.name} />
           <Row label="Mode" value={MODE_META[mode].label.toUpperCase()} />
+          <Row label="Map" value={mapName} />
           {count > 1 && <Row label="Team" value={teamName} />}
           <div>
             <p className="text-display text-[10px] tracking-[0.2em] text-muted-foreground">
@@ -523,6 +592,7 @@ function DetailsFlow({
         <div className="glass-panel mt-8 space-y-3 rounded-lg p-6 text-left">
           <Row label="Tournament" value={tournament.name} />
           <Row label="Mode" value={MODE_META[mode].label.toUpperCase()} />
+          <Row label="Map" value={mapName ?? "Bermuda"} />
           {count > 1 && <Row label="Team" value={teamName} />}
           <Row label="Players" value={players.map((p) => p.name).join(", ")} />
           <Row label="Entry Fee" value={formatINR(total)} />

@@ -48,6 +48,8 @@ function TournamentsPage() {
   const list = useMemo(
     () =>
       tournaments.filter((t) => {
+        if (t.status !== "registration_open") return false;
+
         switch (filter) {
           case "All":
             return true;

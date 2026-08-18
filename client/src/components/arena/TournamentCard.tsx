@@ -1,9 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { CalendarDays, Clock, Trophy, Users } from "lucide-react";
+import { CalendarDays, Clock, Trophy } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import {
   formatDateTime,
   formatINR,
@@ -12,14 +11,7 @@ import {
   type Tournament,
 } from "@/lib/arena-data";
 
-function slotsFor(t: Tournament) {
-  const filled = t.modes.reduce((sum, m) => sum + t.filled[m], 0);
-  const total = t.modes.reduce((sum, m) => sum + t.slots[m], 0);
-  return { filled, total, pct: total ? (filled / total) * 100 : 0 };
-}
-
 export function TournamentCard({ tournament: t }: { tournament: Tournament }) {
-  const { filled, total, pct } = slotsFor(t);
   const cheapest = Math.min(...t.modes.map((m) => t.fees[m]));
   const open = t.status === "registration_open";
 
@@ -69,12 +61,6 @@ export function TournamentCard({ tournament: t }: { tournament: Tournament }) {
             <span className="text-foreground">{formatINR(t.prizePool)}</span>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground">
-            <Users className="size-4 text-primary" />
-            <span className="text-foreground">
-              {filled} / {total}
-            </span>
-          </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
             <CalendarDays className="size-4 text-primary" />
             <span>{formatDateTime(t.startsAt).split(",")[0]}</span>
           </div>
@@ -82,9 +68,10 @@ export function TournamentCard({ tournament: t }: { tournament: Tournament }) {
             <Clock className="size-4 text-primary" />
             <span>{formatDateTime(t.startsAt).split(", ")[1]}</span>
           </div>
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <span className="text-xs uppercase tracking-[0.16em] text-primary">Map</span>
+          </div>
         </dl>
-
-        <Progress value={pct} className="h-1.5" />
 
         <div className="flex gap-2 pt-1">
           <Button asChild size="sm" className="text-display flex-1" disabled={!open}>

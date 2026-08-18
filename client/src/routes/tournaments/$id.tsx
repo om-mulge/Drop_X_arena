@@ -89,13 +89,7 @@ function TournamentDetail() {
               <Fact label="Date & Time" value={formatDateTime(t.startsAt)} />
               <Fact label="Deadline" value={formatDateTime(t.registrationDeadline)} />
               <Fact label="Prize Pool" value={formatINR(t.prizePool)} />
-              {t.modes.map((m) => (
-                <Fact
-                  key={m}
-                  label={`${MODE_META[m].label} Slots`}
-                  value={`${t.filled[m]} / ${t.slots[m]} · ${formatINR(t.fees[m])}`}
-                />
-              ))}
+              <Fact label="Entry Fee" value={formatINR(Math.min(...t.modes.map((m) => t.fees[m])))} />
             </dl>
           </div>
 

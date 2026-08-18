@@ -51,8 +51,8 @@ const STEPS = [
 ];
 
 function Index() {
-  const featured = tournaments[0]!;
-  const open = tournaments.filter((t) => t.status !== "completed").slice(0, 3);
+  const featured = tournaments.find((t) => t.status === "registration_open") ?? tournaments[0]!;
+  const open = tournaments.filter((t) => t.status === "registration_open").slice(0, 3);
 
   return (
     <SiteChrome>

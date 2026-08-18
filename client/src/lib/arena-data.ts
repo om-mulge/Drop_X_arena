@@ -59,7 +59,7 @@ const baseRules = [
 export const tournaments: Tournament[] = [
   {
     id: "battle-arena-cup-01",
-    name: "Bermuda #01",
+    name: "Free Fire#04",
     game: "Free Fire MAX",
     type: "Battle Royale",
     description:
@@ -79,7 +79,7 @@ export const tournaments: Tournament[] = [
     platformFee: 0,
     startsAt: "2026-08-25T19:00:00+05:30",
     registrationDeadline: "2026-08-24T21:00:00+05:30",
-    maps: ["Bermuda", "Purgatory", "Alpine", "Kalahari"],
+    maps: ["Bermuda", "Kalahari", "Purgatory"],
     matches: 6,
     rules: baseRules,
     allowSubstitute: true,
@@ -87,7 +87,7 @@ export const tournaments: Tournament[] = [
   },
   {
     id: "night-hunters",
-    name: "Kalahari",
+    name: "Free Fire#02",
     game: "Free Fire",
     type: "Clash Squad",
     description: "Late-night duo warfare. Fast rounds, sharp aim, zero mercy.",
@@ -106,7 +106,7 @@ export const tournaments: Tournament[] = [
     platformFee: 0,
     startsAt: "2026-08-18T21:30:00+05:30",
     registrationDeadline: "2026-08-18T18:00:00+05:30",
-    maps: ["Bermuda", "Purgatory"],
+    maps: ["Bermuda", "Kalahari", "Purgatory"],
     matches: 5,
     rules: baseRules,
     allowSubstitute: false,
@@ -114,7 +114,7 @@ export const tournaments: Tournament[] = [
   },
   {
     id: "solo-warrior",
-    name: "Purgatory #01",
+    name: "Free Fire#01",
     game: "Free Fire MAX",
     type: "Battle Royale",
     description: "One hundred lone wolves drop in. Only one walks out with the booyah.",
@@ -133,7 +133,7 @@ export const tournaments: Tournament[] = [
     platformFee: 0,
     startsAt: "2026-08-15T20:00:00+05:30",
     registrationDeadline: "2026-08-15T17:00:00+05:30",
-    maps: ["Bermuda", "Alpine"],
+    maps: ["Bermuda"],
     matches: 4,
     rules: baseRules,
     allowSubstitute: false,
