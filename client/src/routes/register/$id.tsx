@@ -295,7 +295,7 @@ function DetailsFlow({
   const [paymentMethod, setPaymentMethod] = useState<"UPI" | "QR Code" | null>(null);
   const [paymentState, setPaymentState] = useState<"pending" | "processing" | "paid">("pending");
 
-  const whatsappNumber = ".....";
+  const whatsappNumber = "8105928223";
 
   const registrationId = useMemo(
     () => `BA-2026-${String(Math.floor(100000 + Math.random() * 899999)).slice(0, 6)}`,
@@ -572,66 +572,208 @@ function DetailsFlow({
                   <p className="text-display text-xs tracking-[0.2em] text-muted-foreground">
                     UPI ID
                   </p>
-                  <p className="text-display text-2xl font-semibold text-fire">droparena@upi</p>
-                  <p className="text-sm text-muted-foreground">
-                    Pay on this UPI ID for registration. Take a screenshot and share it to this
-                    WhatsApp number: <span className="font-semibold text-foreground">{whatsappNumber}</span>
-                  </p>
+                  <p className="text-display text-2xl font-semibold text-fire">ommulge@oksbi</p>
+                  <div className="mt-4 space-y-4">
+  {/* Payment Instructions */}
+  <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
+    <div className="flex items-start gap-3">
+      <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-lg">
+        💳
+      </div>
+
+      <div className="min-w-0">
+        <h3 className="text-sm font-bold text-foreground">
+          Payment & Verification
+        </h3>
+
+        <p className="mt-2 text-sm font-medium leading-6 text-foreground">
+          Complete the payment using the UPI ID shown above.
+        </p>
+
+        <p className="mt-1 text-sm leading-6 text-muted-foreground">
+          After making the payment, take a screenshot of the successful
+          transaction and send it on WhatsApp to:
+        </p>
+
+        <div className="mt-3 inline-flex items-center rounded-md bg-background px-3 py-2 shadow-sm ring-1 ring-border">
+          <span className="text-base font-bold tracking-wide text-foreground">
+            {whatsappNumber}
+          </span>
+        </div>
+
+        <p className="mt-2 text-xs font-medium text-muted-foreground">
+          📱 This screenshot is required for payment verification.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* Important Warning */}
+  <div className="rounded-lg border-2 border-amber-300 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-950/30">
+    <div className="flex items-start gap-3">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-lg dark:bg-amber-900/50">
+        ⚠️
+      </div>
+
+      <div>
+        <h3 className="text-sm font-bold text-amber-900 dark:text-amber-200">
+          Payment Verification Required
+        </h3>
+
+        <p className="mt-2 text-sm leading-6 text-amber-800 dark:text-amber-300">
+          <span className="font-semibold">
+            Clicking the button below does NOT confirm your payment withou paying.
+          </span>{" "}
+          Your registration will be reviewed by our team, and your payment
+          screenshot will be checked before your participation is confirmed.
+        </p>
+
+        <p className="mt-2 text-sm font-semibold leading-6 text-amber-900 dark:text-amber-200">
+          Please complete the payment and send the screenshot before
+          proceeding.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* Verification Status */}
+  <div className="flex items-center gap-2 rounded-md bg-muted/50 px-4 py-3">
+    <span className="text-base">🔒</span>
+    <p className="text-xs font-medium text-muted-foreground">
+      Your registration will be confirmed only after successful payment
+      verification.
+    </p>
+  </div>
+</div>
                 </>
               ) : (
                 <>
-                  <p className="text-display text-xs tracking-[0.2em] text-muted-foreground">
-                    QR Code
-                  </p>
-                  <div className="mx-auto flex w-52 items-center justify-center rounded-md border border-dashed border-border bg-muted/30 p-3">
-                    <div className="grid w-full max-w-[150px] grid-cols-7 gap-1">
-                      {Array.from({ length: 49 }).map((_, idx) => {
-                        const active =
-                          idx % 2 === 0 ||
-                          idx % 5 === 0 ||
-                          idx % 7 === 0 ||
-                          idx % 11 === 0 ||
-                          idx % 13 === 0 ||
-                          idx % 17 === 0 ||
-                          idx % 19 === 0 ||
-                          idx % 23 === 0;
-                        return (
-                          <span
-                            key={idx}
-                            className={`aspect-square rounded-[2px] ${active ? "bg-foreground" : "bg-transparent"}`}
-                          />
-                        );
-                      })}
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Scan this QR code to pay for registration. Take a screenshot and send it on
-                    WhatsApp: <span className="font-semibold text-foreground">{whatsappNumber}</span>
-                  </p>
+                 <p className="text-display text-xs tracking-[0.2em] text-muted-foreground">
+  QR Code
+</p>
+
+<div className="mx-auto flex w-52 items-center justify-center rounded-md border border-dashed border-border bg-white p-3">
+  <img
+    src="/qr.png"
+    alt="Tournament payment QR code"
+    className="h-auto w-full max-w-[180px] object-contain"
+  />
+</div>
+                  <div className="mt-4 space-y-4">
+  {/* Payment Instructions */}
+  <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
+    <div className="flex items-start gap-3">
+      <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-lg">
+        💳
+      </div>
+
+      <div className="min-w-0">
+        <h3 className="text-sm font-bold text-foreground">
+          Payment & Verification
+        </h3>
+
+        <p className="mt-2 text-sm font-medium leading-6 text-foreground">
+          Complete the payment using the QR-Codeshown above.
+        </p>
+
+        <p className="mt-1 text-sm leading-6 text-muted-foreground">
+          After making the payment, take a screenshot of the successful
+          transaction and send it on WhatsApp to:
+        </p>
+
+        <div className="mt-3 inline-flex items-center rounded-md bg-background px-3 py-2 shadow-sm ring-1 ring-border">
+          <span className="text-base font-bold tracking-wide text-foreground">
+            {whatsappNumber}
+          </span>
+        </div>
+
+        <p className="mt-2 text-xs font-medium text-muted-foreground">
+          📱 This screenshot is required for payment verification.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* Important Warning */}
+  <div className="rounded-lg border-2 border-amber-300 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-950/30">
+    <div className="flex items-start gap-3">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-lg dark:bg-amber-900/50">
+        ⚠️
+      </div>
+
+      <div>
+        <h3 className="text-sm font-bold text-amber-900 dark:text-amber-200">
+          Payment Verification Required
+        </h3>
+
+        <p className="mt-2 text-sm leading-6 text-amber-800 dark:text-amber-300">
+          <span className="font-semibold">
+            Clicking the button below does NOT confirm your payment.
+          </span>{" "}
+          Your registration will be reviewed by our team, and your payment
+          screenshot will be checked before your participation is confirmed.
+        </p>
+
+        <p className="mt-2 text-sm font-semibold leading-6 text-amber-900 dark:text-amber-200">
+          Please complete the payment and send the screenshot before
+          proceeding.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* Verification Status */}
+  <div className="flex items-center gap-2 rounded-md bg-muted/50 px-4 py-3">
+    <span className="text-base">🔒</span>
+    <p className="text-xs font-medium text-muted-foreground">
+      Your registration will be confirmed only after successful payment
+      verification.
+    </p>
+  </div>
+</div>
                 </>
               )}
             </div>
           )}
 
           <p className="text-display mt-4 text-xs text-muted-foreground">
-            Status: {paymentState.toUpperCase()}
-          </p>
-          <Button
-            size="lg"
-            className="text-display mt-6 w-full"
-            disabled={paymentState === "processing" || !paymentMethod}
-            onClick={() => {
-              setPaymentState("processing");
-              setTimeout(() => {
-                setPaymentState("paid");
-                setStep("done");
-              }, 1200);
-            }}
-          >
-            {paymentState === "processing"
-              ? "Processing…"
-              : "Pay on the specified QR or UPI and proceed"}
-          </Button>
+  Status: {paymentState.toUpperCase()}
+</p>
+
+<Button
+  size="lg"
+  className="text-display mt-6 w-full"
+  disabled={paymentState === "processing" || !paymentMethod}
+  onClick={() => {
+    // Vibrate the device
+    if (navigator.vibrate) {
+      navigator.vibrate([200, 100, 200]);
+    }
+
+    // Show confirmation warning instead of proceeding immediately
+    const confirmed = window.confirm(
+      "⚠️ Did you share the payment screenshot on WhatsApp?If not press Cancel and share it first.\n\n" +
+        "Please make sure you have completed the payment and sent the successful transaction screenshot for verification.Even though you paid and dint share the screenshot you will not be able to participate in the tournament"
+    );
+
+    // User clicked Cancel
+    if (!confirmed) {
+      return;
+    }
+
+    // User confirmed
+    setPaymentState("processing");
+
+    setTimeout(() => {
+      setPaymentState("paid");
+      setStep("done");
+    }, 1200);
+  }}
+>
+  {paymentState === "processing"
+    ? "Processing…"
+    : "Paid & Took Screenshot — Please Proceed"}
+</Button>
         </div>
       </div>
     );
