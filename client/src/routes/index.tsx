@@ -89,11 +89,6 @@ function Index() {
             Compete. Conquer. Become the Champion. Drop in. Fight hard. Booyah.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg" className="text-display shine-on-hover">
-              <Link to="/register/$id" params={{ id: featured.id }}>
-                Register For Tournament
-              </Link>
-            </Button>
             <Button asChild size="lg" variant="outline" className="text-display">
               <Link to="/tournaments">Explore Tournaments</Link>
             </Button>
@@ -130,20 +125,27 @@ function Index() {
           <h2 className="text-display text-3xl md:text-4xl">Choose Your Battle Mode</h2>
         </Reveal>
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
-          {(["solo", "duo", "squad"] as const).map((m, i) => (
+          {([
+            { mode: "solo", route: "/tournaments/solo-warrior", tag: "Bermuda, Kalahari • 1v1 custom" },
+            { mode: "duo", route: "/tournaments/night-hunters", tag: "Bermuda, Kalahari • 2v2 custom" },
+            { mode: "squad", route: "/tournaments/battle-arena-cup-01", tag: "Bermuda, Kalahari • 4v4 custom" },
+          ] as const).map(({ mode, route, tag }, i) => (
             <Reveal
-              key={m}
+              key={mode}
               delay={i * 110}
               className="glass-panel hover-lift shine-on-hover group rounded-lg p-6"
             >
-              <div className="text-4xl transition-transform duration-300 group-hover:scale-125">
-                {MODE_META[m].icon}
-              </div>
-              <h3 className="text-display mt-3 text-2xl">{MODE_META[m].label}</h3>
-              <p className="text-display text-xs text-muted-foreground">
-                {MODE_META[m].players} Player{MODE_META[m].players > 1 ? "s" : ""}
-              </p>
-              <p className="mt-2 text-sm text-muted-foreground">{MODE_META[m].blurb}</p>
+              <Link to={route} className="block">
+                <div className="text-4xl transition-transform duration-300 group-hover:scale-125">
+                  {MODE_META[mode].icon}
+                </div>
+                <h3 className="text-display mt-3 text-2xl">{MODE_META[mode].label}</h3>
+                <p className="text-display text-xs text-muted-foreground">
+                  {MODE_META[mode].players} Player{MODE_META[mode].players > 1 ? "s" : ""}
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground">{MODE_META[mode].blurb}</p>
+                <p className="mt-3 text-xs tracking-[0.18em] text-primary">{tag.toUpperCase()}</p>
+              </Link>
             </Reveal>
           ))}
         </div>

@@ -32,11 +32,9 @@ const FILTERS = [
   "Solo",
   "Duo",
   "Squad",
-  "Battle Royale",
-  "Clash Squad",
-  "Upcoming",
-  "Live",
-  "Completed",
+  "1v1 Custom",
+  "2v2 Custom",
+  "4v4 Custom",
 ] as const;
 
 function TournamentsPage() {
@@ -54,18 +52,17 @@ function TournamentsPage() {
           case "All":
             return true;
           case "Solo":
+            return t.modes.includes("solo");
           case "Duo":
+            return t.modes.includes("duo");
           case "Squad":
-            return t.modes.includes(filter.toLowerCase() as "solo" | "duo" | "squad");
-          case "Battle Royale":
-          case "Clash Squad":
-            return t.type === filter;
-          case "Upcoming":
-            return t.status === "registration_open" || t.status === "registration_closed";
-          case "Live":
-            return t.status === "live";
-          case "Completed":
-            return t.status === "completed";
+            return t.modes.includes("squad");
+          case "1v1 Custom":
+            return t.modes.includes("solo");
+          case "2v2 Custom":
+            return t.modes.includes("duo");
+          case "4v4 Custom":
+            return t.modes.includes("squad");
         }
       }),
     [filter],
