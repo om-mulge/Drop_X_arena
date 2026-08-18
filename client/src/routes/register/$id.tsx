@@ -314,6 +314,12 @@ function DetailsFlow({
 
   const total = tournament.fees[mode] + tournament.platformFee;
 
+  function formatModeLabel(value: BattleMode) {
+    const base = MODE_META[value].label.toUpperCase();
+    const custom = value === "solo" ? "1V1" : value === "duo" ? "2V2" : "4V4";
+    return `${base} / ${custom}`;
+  }
+
   function update(i: number, patch: Partial<PlayerEntry>) {
     setPlayers((prev) => prev.map((p, idx) => (idx === i ? { ...p, ...patch } : p)));
   }
@@ -433,38 +439,89 @@ function DetailsFlow({
     return (
       <div>
         <h1 className="text-display text-3xl md:text-4xl">Confirm Your Entry</h1>
-        <div className="glass-panel mt-6 space-y-4 rounded-lg p-6">
-          <Row label="Tournament" value={tournament.name} />
-          <Row label="Mode" value={MODE_META[mode].label.toUpperCase()} />
-          <Row label="Map" value={mapName} />
-          {count > 1 && <Row label="Team" value={teamName} />}
-          <div>
-            <p className="text-display text-[10px] tracking-[0.2em] text-muted-foreground">
-              Players
-            </p>
-            <ul className="mt-2 space-y-1 text-sm">
-              {players.map((p, i) => (
-                <li key={i} className="flex justify-between border-b border-border/50 pb-1">
-                  <span>
-                    {i === 0 && count > 1 ? "Captain" : `Player ${i + 1}`} — {p.name} ({p.ign})
-                  </span>
-                  <span className="text-muted-foreground tabular-nums">{p.uid}</span>
-                </li>
-              ))}
-              {useSub && sub.name && (
-                <li className="flex justify-between text-muted-foreground">
-                  <span>Substitute — {sub.name}</span>
-                  <span className="tabular-nums">{sub.uid}</span>
-                </li>
+        <div className="glass-panel mt-6 overflow-hidden rounded-lg">
+          <table className="w-full border-separate border-spacing-0 text-left text-sm">
+            <tbody>
+              <tr className="border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Tournament
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">{tournament.name}</td>
+              </tr>
+              <tr className="border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Mode
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">{formatModeLabel(mode)}</td>
+              </tr>
+              <tr className="border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Map
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">{mapName}</td>
+              </tr>
+              {count > 1 && (
+                <tr className="border-b border-border/60">
+                  <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                    Team
+                  </th>
+                  <td className="px-4 py-3 text-right text-foreground">{teamName}</td>
+                </tr>
               )}
-            </ul>
-          </div>
-          <Row label="Entry Fee" value={formatINR(tournament.fees[mode])} />
-          <Row label="Platform Fee" value={formatINR(tournament.platformFee)} />
-          <div className="text-display flex items-center justify-between border-t border-border pt-4 text-2xl">
-            <span>Total</span>
-            <span className="text-fire">{formatINR(total)}</span>
-          </div>
+              <tr className="align-top border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Players
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">
+                  <div className="space-y-3">
+                    {players.map((p, i) => (
+                      <div key={i} className="rounded-md border border-border/50 bg-background/30 p-2 text-right">
+                        <div className="font-medium text-foreground">
+                          {i === 0 && count > 1 ? "Captain" : `Player ${i + 1}`} — {p.name}
+                        </div>
+                        <div className="mt-1 text-muted-foreground">
+                          IGN: {p.ign} · UID: {p.uid}
+                        </div>
+                        <div className="mt-1 text-muted-foreground">
+                          WA: {contact.whatsapp || contact.phone || "Not provided"}
+                        </div>
+                      </div>
+                    ))}
+                    {useSub && sub.name && (
+                      <div className="rounded-md border border-border/50 bg-background/30 p-2 text-right">
+                        <div className="font-medium text-foreground">Substitute — {sub.name}</div>
+                        <div className="mt-1 text-muted-foreground">IGN: {sub.ign} · UID: {sub.uid}</div>
+                      </div>
+                    )}
+                  </div>
+                </td>
+              </tr>
+              <tr className="border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Entry Fee
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">
+                  {formatINR(tournament.fees[mode])}
+                </td>
+              </tr>
+              <tr className="border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Platform Fee
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">
+                  {formatINR(tournament.platformFee)}
+                </td>
+              </tr>
+              <tr>
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Total
+                </th>
+                <td className="px-4 py-3 text-right text-2xl font-bold text-fire">
+                  {formatINR(total)}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div className="mt-6 flex gap-3">
           <Button variant="outline" className="text-display" onClick={() => setStep("details")}>
@@ -589,16 +646,84 @@ function DetailsFlow({
         <p className="text-display text-muted-foreground">Your registration is in progress</p>
         <Badge className="text-display mt-4 rounded-sm text-base">{registrationId}</Badge>
 
-        <div className="glass-panel mt-8 space-y-3 rounded-lg p-6 text-left">
-          <Row label="Tournament" value={tournament.name} />
-          <Row label="Mode" value={MODE_META[mode].label.toUpperCase()} />
-          <Row label="Map" value={mapName ?? "Bermuda"} />
-          {count > 1 && <Row label="Team" value={teamName} />}
-          <Row label="Players" value={players.map((p) => p.name).join(", ")} />
-          <Row label="Entry Fee" value={formatINR(total)} />
-          <Row label="Payment" value="PENDING VERIFICATION" />
-          <Row label="Match" value={formatDateTime(tournament.startsAt)} />
-          <Row label="Room Details" value="Locked until the team verifies payment" />
+        <div className="glass-panel mt-8 overflow-hidden rounded-lg">
+          <table className="w-full border-separate border-spacing-0 text-left text-sm">
+            <tbody>
+              <tr className="border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Tournament
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">{tournament.name}</td>
+              </tr>
+              <tr className="border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Mode
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">{formatModeLabel(mode)}</td>
+              </tr>
+              <tr className="border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Map
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">{mapName ?? "Bermuda"}</td>
+              </tr>
+              {count > 1 && (
+                <tr className="border-b border-border/60">
+                  <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                    Team
+                  </th>
+                  <td className="px-4 py-3 text-right text-foreground">{teamName}</td>
+                </tr>
+              )}
+              <tr className="align-top border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Players
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">
+                  <div className="space-y-2">
+                    {players.map((p, i) => (
+                      <div key={i} className="rounded-md border border-border/50 bg-background/30 p-2 text-right">
+                        <div className="font-medium text-foreground">
+                          {i === 0 && count > 1 ? "Captain" : `Player ${i + 1}`} — {p.name}
+                        </div>
+                        <div className="mt-1 text-muted-foreground">IGN: {p.ign}</div>
+                        <div className="mt-1 text-muted-foreground">UID: {p.uid}</div>
+                        <div className="mt-1 text-muted-foreground">
+                          WA: {contact.whatsapp || contact.phone || "Not provided"}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </td>
+              </tr>
+              <tr className="border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Entry Fee
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">{formatINR(total)}</td>
+              </tr>
+              <tr className="border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Payment
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">PENDING VERIFICATION</td>
+              </tr>
+              <tr className="border-b border-border/60">
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Match
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">{formatDateTime(tournament.startsAt)}</td>
+              </tr>
+              <tr>
+                <th className="text-display px-4 py-3 text-[10px] tracking-[0.2em] text-muted-foreground">
+                  Room Details
+                </th>
+                <td className="px-4 py-3 text-right text-foreground">
+                  Locked until the team verifies payment
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <div className="glass-panel mt-6 rounded-lg p-6 text-left">
