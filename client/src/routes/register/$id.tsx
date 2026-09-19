@@ -778,7 +778,6 @@ function DetailsFlow({
       </div>
     );
   }
-
   return (
     <div className="relative text-center">
       <Embers count={22} />
